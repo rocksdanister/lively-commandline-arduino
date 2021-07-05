@@ -7,6 +7,8 @@ namespace ArduinoSharp
     class Program
     {
         private static int hue = 0;
+        private static readonly string uniqueAppName = "LIVELY:DESKTOPWALLPAPERSYSTEM";
+        private static readonly string pipeServerName = uniqueAppName + Environment.UserName;
 
         static void Main(string[] args)
         {
@@ -24,7 +26,7 @@ namespace ArduinoSharp
                 hue = val == 1 ? (hue+10) : (hue-10);
                 //or execute livelycu commandline commands..
                 livelywpf.Helpers.PipeClient.SendMessage(
-                    "LIVELY:DESKTOPWALLPAPERSYSTEM", 
+                    pipeServerName, 
                     new string[] { "setprop", "--property", "hue=" + Clamp(hue, -100, 100)});
             }
         }
